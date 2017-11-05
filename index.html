@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Créer un menu</title>
+		<meta charset="UTF-8" />
+		<link rel="icon" type="image/ico" href="favicon.ico" />
+		<link rel="stylesheet" href="presentation.css" />
+		<script src="js-beautify-master/beautify-html.js"></script>
+		<script src="js-beautify-master/beautify-css.js"></script>
+		<script src="presentation.js"></script>
+		<style id="base" class="etape">
+			nav {
+				float:left;
+				margin-right:1em;
+				font-weight:bold;
+				font-family: arial;
+			}
+			nav ul {
+				list-style-type:none;
+				padding: 0;
+				margin:0;
+				display: flex;
+				flex-direction: column;
+			}
+			nav li {
+			}
+			nav li a {
+			}
+		</style>
+		<style id="boutons" class="etape">
+			nav a {
+				text-decoration: inherit;
+				color:inherit;
+				border:1px solid black;
+
+				display:flex;
+				align-items: center;
+				justify-content: center;
+				text-align: center;
+
+				padding: .5em;
+				border-radius: .5em;
+			}
+			nav li:hover > a {
+				background-color: rgba(0,0,0.1);
+			}
+		</style>
+		<style id="base2" class="etape">
+			nav li {
+				border: 1px solid rgba(153,153,0,.5);
+				padding: .5em;
+				background-color: rgba(153,153,0,.5);
+			}
+			nav ul {
+				border: 1px solid rgba(153,153,0,.5);
+				padding: .5em;
+				background-color: rgba(153,153,0,.5);
+/*				animation: 5s glow infinite;*/
+			}
+			nav li > ul {
+				font-size:.9em;
+			}
+		</style>
+		<style id="base_erreurs" class="etape">
+			nav li a:hover {
+				font-weight:bold;
+				text-transform: uppercase;
+			}
+		</style>
+		<style id="hierarchie" class="etape">
+			nav li {
+				box-shadow:1px 1px 3px rgba(0,0,0,.5);
+				overflow:hidden;
+				background-color:white;
+			}
+			nav ul {
+				box-shadow:1px 1px 3px rgba(0,0,0,.5) inset;
+				margin:.25em;
+				background-color:rgb(90%,90%,90%);
+				overflow: hidden;
+			}
+			nav > ul {
+				margin:0;
+			}
+			nav ul ul {
+				font-size:.9em;
+			}
+			li {
+				border-radius:7px;
+			}
+			ul {
+				border-radius:7px;
+			}
+			nav li:hover {
+				background-color:yellow;
+			}
+		</style>
+		<style id="hierarchie_cachee" class="etape">
+			nav {
+				width:16em;
+			}
+			nav ul {
+				border-radius:7px;
+				box-shadow:1px 1px 3px rgba(0,0,0,.5) inset;
+				margin:.25em;
+				background-color:rgb(90%,90%,90%);
+				overflow: hidden;
+			}
+			nav ul ul {
+				font-size:.9em;
+			}
+			nav > ul {
+				margin:0;
+			}
+			nav li {
+				border-radius:7px;
+				box-shadow:1px 1px 3px rgba(0,0,0,.5);
+				overflow:hidden;
+				background-color:white;
+			}
+			nav li > ul {
+				display:none;
+			}
+			nav li:hover > ul {
+				display:inherit;
+			}
+			nav li:hover {
+				background-color:yellow;
+			}
+		</style>
+		<style id="hierarchie_flottante" class="etape">
+			nav ul {
+				border-radius:7px;
+				box-shadow:1px 1px 3px rgba(0,0,0,.5) inset;
+				background-color:rgb(90%,90%,90%);
+				overflow: hidden;
+			}
+			nav li {
+				border-radius:7px;
+				box-shadow:1px 1px 3px rgba(0,0,0,.5);
+				overflow:hidden;
+				background-color:white;
+			}
+			nav li > ul {
+				display:none;
+				position:absolute;
+				box-shadow:1px 1px 3px rgba(0,0,0,.5);
+				background-color:yellow;
+			}
+			nav li:hover {
+				background-color:yellow;
+			}
+			nav li:hover > ul {
+				display:inherit;
+			}
+		</style>
+		<style id="hierarchie_droite" class="etape">
+			nav {
+				width:13em;
+			}
+			nav ul {
+				border-radius:7px;
+				box-shadow:1px 1px 3px rgba(0,0,0,.5) inset;
+				background-color:rgb(90%,90%,90%);
+				padding:1px;
+			}
+			nav li {
+				border-radius:7px;
+				box-shadow:1px 1px 3px rgba(0,0,0,.5);
+				background-color:white;
+				position:relative;
+			}
+			nav li > ul {
+				display:none;
+				position:absolute;
+				box-shadow:1px 1px 3px rgba(0,0,0,.5);
+				margin-top:-5px;
+				z-index:1000;
+				white-space:nowrap;
+				left:100%;
+				top:0;
+				margin-left:-5px;
+			}
+			nav li li {
+				text-align:left;
+			}
+			nav li:hover {
+				background-color:yellow;
+			}
+			nav li:hover > ul {
+				display:inherit;
+			}
+		</style>
+		<style id="horizontal" class="etape">
+			nav {
+				float:none;
+				border:1px solid black;
+				overflow:hidden;
+				font-family:verdana;
+				background-color: #cfc;
+				background-image:linear-gradient(bottom, rgba(0,0,0,0), rgba(0,0,0,.3));
+				font-size:smaller;
+			}
+			nav > ul > li {
+				float:left;
+				border:1px solid #030;
+				background-image:linear-gradient(top, rgba(255,255,255,.8), rgba(255,255,255,0) 50%, rgba(0,0,0,0) 50%, rgba(0,0,0,.5));
+				text-shadow:0px 1px 0px rgba(255,255,255,.5);
+				background-color:#9C6;
+				color:#030;
+			}
+			nav > ul > li > ul {
+				display:none;
+				position:absolute;
+				float:left;
+				border:1px solid black;
+				background-color:#9C9;
+				box-shadow:2px 2px 2px rgba(0,0,0,.5);
+			}
+			nav > ul >li > ul > li {
+				background-color:rgba(255,255,255,.5);
+			}
+			nav li:hover > a {
+				color:#993300;
+			}
+			nav li:hover > ul {
+				display:inherit;
+			}
+			nav > ul > li > ul > li:hover {
+				background-color:#CFC;
+			}
+			nav > ul > li:hover {
+				background-color:#CFC;
+			}
+		</style>
+	</head>
+	<body>
+		<nav>
+			<ul>
+				<li><a href="#">Lorem ipsum</a></li>
+				<li><a href="#">Dolor sit amet</a></li>
+				<li><a href="#">Consectetur adipiscing</a>
+					<ul>
+						<li><a href="#">Maecenas pharetra</a></li>
+						<li><a href="#">Elit risus non consequat laoreet</a></li>
+					</ul>
+				</li>
+				<li><a href="#">Ligula sem ornare dui</a>
+					<ul>
+						<li><a href="#">Aut, distinctio.</a></li>
+						<li><a href="#">Perferendis, similique.</a></li>
+						<li><a href="#">Ratione, nam.</a>
+							<ul>
+								<li><a href="#">Lorem ipsum.</a></li>
+								<li><a href="#">Cumque, impedit.</a></li>
+								<li><a href="#">Repellendus, quae.</a></li>
+								<li><a href="#">Quasi, possimus.</a></li>
+								<li><a href="#">Error, labore!</a></li>
+							</ul>
+						</li>
+						<li><a href="#">Temporibus, facilis!</a></li>
+					</ul>
+				</li>
+				<li><a href="#">Non elementum</a></li>
+			</ul>
+		</nav>
+		<p> Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque consectetur ipsum porta orci pellentesque ultrices. Curabitur tincidunt, mauris eget vulputate ullamcorper, nibh nisi facilisis quam, eget scelerisque neque felis non massa. Morbi eleifend orci at magna porta viverra. Pellentesque justo diam, lobortis vel aliquam et, tempus non diam. Etiam facilisis neque non nulla porta eget tincidunt elit volutpat. Mauris pulvinar pulvinar urna quis sollicitudin. Proin dignissim magna eu orci vehicula rhoncus.</p>
+	</body>
+</html>
