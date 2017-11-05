@@ -96,6 +96,7 @@ body {
 	display:flex;
 	flex-direction: column;
 	padding: .25em;
+	position: relative;
 	& > div {
 		& > * {
 			white-space: pre-wrap;
@@ -132,6 +133,46 @@ body {
 		background-color: #ddf;
 		&:before {
 			content:"{CSS}";
+		}
+	}
+}
+input.toggle {
+	display:none;
+	& + label {
+		position: relative;
+		float: right;
+		display: block;
+		background-color: red;
+		text-align: right;
+		&:before {
+			position: absolute;
+			right: 0.5em;
+			top: 0.5em;
+			content: "\2d";
+			content: "\23f7";
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+			width: 1.5em;
+			height: 1.5em;
+			line-height: 0;
+			background-color: rgba(0, 0, 0, 0.3);
+			color: white;
+			font-weight: bold;
+			border-radius: 100%;
+			z-index: 100;
+			cursor: pointer;
+		}
+	}
+	&:checked {
+		& + label:before {
+			content: "\2d";
+			content: "\23f4";
+		}
+		& + label + * {
+			flex: 0 1 1em !important;
+//			display: none;
 		}
 	}
 }

@@ -63,12 +63,24 @@ class Presentation {
 			return this._options;
 		}
 	static dom_code() {
-		var code;
-		code = document.createElement('div');
-		code.setAttribute('id', 'code');
-		code.appendChild(this.html);
-		code.appendChild(this.css);
-		return code;
+		var resultat;
+		resultat = document.createElement('div');
+		resultat.setAttribute('id', 'code');
+		this.ajouterToggle(resultat, "code_html_toggle");
+		resultat.appendChild(this.html);
+//		this.ajouterToggle(resultat, "code_css_toggle");
+		resultat.appendChild(this.css);
+		return resultat;
+	}
+	static ajouterToggle(conteneur, id) {
+		var input, label;
+		input = conteneur.appendChild(document.createElement("input"));
+		input.classList.add("toggle");
+		input.setAttribute("type", "checkbox");
+		input.setAttribute("id", id);
+		label = conteneur.appendChild(document.createElement("label"));
+		label.setAttribute("for", id);
+		label.setAttribute("type", "checkbox");
 	}
 	static dom_interface(contenu) {
 		document.body.appendChild(this.dom_header());
