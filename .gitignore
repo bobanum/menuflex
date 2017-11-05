@@ -3,5 +3,4 @@
 # Example .gitignore files: https://github.com/github/gitignore
 /bower_components/
 /node_modules/
-/js-beautify-master/
-/Pretty-Diff-master/
+/js-beautify/

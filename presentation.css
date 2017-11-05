@@ -112,12 +112,17 @@ body header * {
   padding: .25em;
 }
 #code > div {
-  white-space: pre-wrap;
   box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.3) inset;
   overflow: hidden;
   margin: .25em;
   padding: .5em;
   position: relative;
+}
+#code > div > * {
+  white-space: pre-wrap;
+}
+#code > div > *:hover {
+  background-color: rgba(0, 0, 0, 0.2);
 }
 #code > div:before {
   color: rgba(0, 0, 0, 0);
@@ -130,6 +135,7 @@ body header * {
   font-family: verdana;
   font-weight: bold;
   text-align: right;
+  pointer-events: none;
 }
 #code > #code-html {
   background-color: #dfd;
@@ -204,11 +210,6 @@ body header * {
   }
   div.milieu #code > div {
     flex: 1 0 0;
-  }
-}
-@media all and (min-width: 1280px) {
-  #code {
-    flex-direction: row;
   }
 }
 @keyframes glow {

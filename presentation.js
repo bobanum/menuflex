@@ -1,5 +1,5 @@
 /*jslint esnext:true, browser:true*/
-/*globals style_html:true,css_beautify:true*/
+/*globals html_beautify:true,css_beautify:true*/
 class Presentation {
 	static init() {
 		this.afficherSeulementSiCss = true;
@@ -231,37 +231,53 @@ class Presentation {
 		if (!this.afficherSeulementSiCss || css_code) {
 			element.classList.add('pres-affiche');
 			html_code = this.html_code(element);
-			this.html.textContent = html_code;
-			this.css.textContent = css_code;
+			this.html.innerHTML = html_code;
+			this.css.innerHTML = css_code;
 		}
 	}
+	static formatterCode(txt) {
+		var resultat, div;
+		if (!txt) {
+			return "";
+		}
+		div = document.createElement("div");
+		div.textContent = txt;
+		resultat = div.innerHTML;
+		resultat = resultat.split(/\r\n|\n\r|\r|\n/);
+		resultat = resultat.map((l)=>"<div>"+l+"</div>");
+		resultat = resultat.join("\r\n");
+		return resultat;
+	}
 	static html_code(element) {
-		var code = element.outerHTML;
-		code = code.replace(/pres-[a-zA-Z_-]+ +| +pres-[a-zA-Z_-]+|pres-[a-zA-Z_-]+/g, "");
-		code = code.replace(/ *class=" *"/g, "");
-		code = style_html(code, {
+		var resultat = element.outerHTML;
+		var options = {
 			'indent_size': 3,
 			'indent_char': ' ',
 			'max_char': 78,
 			'brace_style': 'expand',
 			'unformatted': ['a', 'sub', 'sup', 'b', 'i', 'u', 'strong', 'em']
-		});
-		return code;
+		};
+		resultat = resultat.replace(/pres-[a-zA-Z_-]+ +| +pres-[a-zA-Z_-]+|pres-[a-zA-Z_-]+/g, "");
+		resultat = resultat.replace(/ *class=" *"/g, "");
+		resultat = html_beautify(resultat, options);
+		resultat = this.formatterCode(resultat);
+		return resultat;
 	}
 	static css_code(element) {
-		var code, regles, i, n;
-		code = "";
+		var resultat, regles, i, n;
+		resultat = "";
 		regles = this.trouverRegles(element);
 		if (regles.length) {
 			for (i = 0, n = regles.length; i < n; i += 1) {
-				code += regles[i].cssText;
+				resultat += regles[i].cssText;
 			}
 		}
-		code = css_beautify(code, {
+		resultat = css_beautify(resultat, {
 			'indent_size': 3,
 			'indent_char': ' '
 		});
-		return code;
+		resultat = this.formatterCode(resultat);
+		return resultat;
 	}
 }
 Presentation.init();

@@ -91,15 +91,18 @@ body {
 	}
 }
 #code {
-//	flex: 0 0 20em;
 	background-color:@panneau-fond;
 	font-family:monospace;
 	display:flex;
 	flex-direction: column;
 	padding: .25em;
 	& > div {
-//		flex: 1 0 0;
-		white-space: pre-wrap;
+		& > * {
+			white-space: pre-wrap;
+			&:hover {
+				background-color: rgba(0,0,0,.2);
+			}
+		}
 		box-shadow:3px 3px 15px rgba(0,0,0,.3) inset;
 		overflow: hidden;
 		margin:.25em;
@@ -116,6 +119,7 @@ body {
 			font-family: verdana;
 			font-weight:bold;
 			text-align:right;
+			pointer-events: none;
 		}
 	}
 	& > #code-html {
@@ -196,7 +200,7 @@ body {
 }
 @media all and (min-width: 1280px) {
 	#code {
-		flex-direction: row;
+//		flex-direction: row;
 	}
 }
 @keyframes glow {
