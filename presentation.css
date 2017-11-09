@@ -23,7 +23,7 @@ body header {
   letter-spacing: -0.05em;
   word-spacing: .3em;
   color: #999966;
-  background-color: #f2f2cc;
+  background-color: #666666;
 }
 body header * {
   margin: 0;
@@ -122,9 +122,6 @@ body header * {
 #code > div > * {
   white-space: pre-wrap;
 }
-#code > div > *:hover {
-  background-color: rgba(0, 0, 0, 0.2);
-}
 #code > div:before {
   color: rgba(0, 0, 0, 0);
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.07);
@@ -140,12 +137,14 @@ body header * {
 }
 #code > #code-html {
   background-color: #dfd;
+  background-color: #eef6ee;
 }
 #code > #code-html:before {
   content: "<HTML>";
 }
 #code > #code-css {
   background-color: #ddf;
+  background-color: #eeeef6;
 }
 #code > #code-css:before {
   content: "{CSS}";
@@ -187,7 +186,24 @@ input.toggle:checked + label:before {
 input.toggle:checked + label + * {
   flex: 0 1 1em !important;
 }
-@media all and (min-width: 800px) {
+div.description {
+  zzzdisplay: table;
+  background-color: #e6e6e6;
+  padding: .5em;
+}
+div.description code {
+  font-family: courier;
+}
+div.description h3 {
+  font-size: 1em;
+}
+div.description > ol {
+  list-style-type: none;
+}
+div.description ol {
+  padding-left: 1em;
+}
+@media all {
   header {
     font-size: 4em;
     line-height: 1em;
@@ -197,7 +213,7 @@ input.toggle:checked + label + * {
     flex: 1 0 auto;
   }
   div.milieu #body {
-    flex: 0 1 35em;
+    flex: 0 1 40em;
     order: 1;
   }
   div.milieu #pres-options {
@@ -219,34 +235,34 @@ input.toggle:checked + label + * {
   header {
     font-size: 9vw;
   }
-  div.milieu {
+  div.milieuzzz {
     flex-direction: column;
     flex: 1 0 auto;
   }
-  div.milieu #body {
+  div.milieuzzz #body {
     flex: 1 0 15em;
     order: 1;
   }
-  div.milieu #pres-options {
+  div.milieuzzz #pres-options {
     font-size: 2vw;
     flex: 0 0 auto;
     order: 0;
   }
-  div.milieu #pres-options > div {
+  div.milieuzzz #pres-options > div {
     flex-wrap: wrap;
   }
-  div.milieu .radio {
+  div.milieuzzz .radio {
     flex: 1 0 9em;
   }
-  div.milieu .radio label {
+  div.milieuzzz .radio label {
     padding: 0;
   }
-  div.milieu #code {
+  div.milieuzzz #code {
     order: 2;
     flex: 1 0 20em;
     flex-direction: row;
   }
-  div.milieu #code > div {
+  div.milieuzzz #code > div {
     flex: 1 0 0;
   }
 }

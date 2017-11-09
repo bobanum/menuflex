@@ -26,7 +26,7 @@ body {
 		letter-spacing: -.05em;
 		word-spacing: .3em;
 		color: @bouton-fond;
-		background-color: @bouton-texte;
+		background-color: @panneau-fond;
 		* {
 			margin: 0;
 		}
@@ -101,7 +101,7 @@ body {
 		& > * {
 			white-space: pre-wrap;
 			&:hover {
-				background-color: rgba(0,0,0,.2);
+//				background-color: rgba(0,0,0,.2);
 			}
 		}
 		box-shadow:3px 3px 15px rgba(0,0,0,.3) inset;
@@ -125,12 +125,14 @@ body {
 	}
 	& > #code-html {
 		background-color: #dfd;
+		background-color: #eef6ee;
 		&:before {
 			content:"<HTML>";
 		}
 	}
 	& > #code-css {
 		background-color: #ddf;
+		background-color: #eeeef6;
 		&:before {
 			content:"{CSS}";
 		}
@@ -176,7 +178,24 @@ input.toggle {
 		}
 	}
 }
-@media all and (min-width:800px) {
+div.description {
+    zzzdisplay: table;
+	background-color: rgb(90%,90%,90%);
+	padding: .5em;
+    code {
+        font-family: courier;
+    }
+    h3 {
+        font-size: 1em;
+    }
+    & > ol {
+        list-style-type: none;
+    }
+    ol {
+        padding-left: 1em;
+    }
+}
+@media all {
 	header {
 		font-size: 4em;
 		line-height: 1em;
@@ -185,7 +204,7 @@ input.toggle {
 		flex-direction: row;
 		flex: 1 0 auto;
 		#body {
-			flex: 0 1 35em;
+			flex: 0 1 40em;
 			order: 1;
 		}
 		#pres-options {
@@ -208,7 +227,7 @@ input.toggle {
 	header {
 		font-size: 9vw;
 	}
-	div.milieu {
+	div.milieuzzz {
 		flex-direction: column;
 		flex: 1 0 auto;
 		#body {

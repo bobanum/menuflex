@@ -20,19 +20,11 @@ class Presentation {
 			},
 			etape: {
 				change: function () {
-					var styles = {
-						"rien": '',
-						"base": '#base',
-						"boutons": '#base, #boutons',
-						"base2": '#base, #boutons, #base2',
-						"erreurs_de_base": '#base, #boutons, #base2, #base_erreurs',
-						"hierarhie": '#base, #boutons, #hierarchie',
-						"hierarhie_cachee": '#base, #boutons, #hierarchie_cachee',
-						"hierarhie_flottante": '#base, #boutons, #hierarchie_flottante',
-						"hierarhie_droite": '#base, #boutons, #hierarchie_droite',
-						"horizontal": '#base, #boutons, #horizontal',
-					};
-					Presentation.activerEtapes(styles[this.value]);
+					Presentation.activerEtapes(Presentation.etapes[this.value].styles);
+					Presentation.activerDescription(this.value);
+					var css_code = Presentation.css_code();
+					Presentation.css.innerHTML = css_code;
+
 				}
 			}
 		};
@@ -93,6 +85,7 @@ class Presentation {
 	}
 	static load() {
 		var page;
+		this.recupererEtapes();
 		page = document.createElement("div");
 		page.setAttribute("id", "body");
 		this.wrapContenu(document.body, page);
@@ -101,11 +94,18 @@ class Presentation {
 
 		this.normaliserRegles();
 
-		document.getElementById("etape_base2").dispatchEvent(new Event('change'));
-		document.getElementById("etape_base2").setAttribute("checked", "checked");
+		document.getElementById("etape_hierarchie").dispatchEvent(new Event('change'));
+		document.getElementById("etape_hierarchie").setAttribute("checked", "checked");
 
 		page.addEventListener("mouseover", this.evt.body.mouseover);
 		page.addEventListener("mouseout", this.evt.body.mouseout);
+	}
+	static activerDescription(etape) {
+		var elements;
+		elements = [].slice.call(document.querySelectorAll("[data-etape]"), 0);
+		elements.forEach(e=>e.style.display="none");
+		elements = [].slice.call(document.querySelectorAll("[data-etape="+etape+"]"), 0);
+		elements.forEach(e=>e.style.display="");
 	}
 	static wrapContenu(element, conteneur) {
 		while (element.childNodes.length > 0) {
@@ -138,22 +138,26 @@ class Presentation {
 		css.setAttribute('id', 'code-css');
 		return css;
 	}
+	static recupererEtapes() {
+		var resultat = {};
+		var elements = document.querySelectorAll("style.etape");
+		[].forEach.call(elements, function (s) {
+			var styles = s.getAttribute("data-dependances");
+			if (styles) {
+				styles = "#" + s.getAttribute("id") + ", " + styles;
+			} else {
+				styles = "#" + s.getAttribute("id");
+			}
+			resultat[s.getAttribute("id")] = {titre:s.getAttribute("data-titre"), styles:styles};
+		});
+		this.etapes = resultat;
+		return resultat;
+	}
 	static dom_options() {
 		var options;
 		options = document.createElement('div');
 		options.setAttribute('id', 'pres-options');
-		options.appendChild(this.creerBoutons("etape", this.evt.etape.change, {
-			'rien':'Rien',
-			'base':'Base',
-			'boutons':'Boutons',
-			'base2':'Base2',
-			'erreurs_de_base':'Erreurs de&nbsp;base',
-			'hierarhie':'Hiérarchie',
-			'hierarhie_cachee':'Hiérarchie cachée',
-			'hierarhie_flottante':'Hiérarchie flottante',
-			'hierarhie_droite':'Hiérarchie droite',
-			'horizontal':'Horizontal',
-		}));
+		options.appendChild(this.creerBoutons("etape", this.evt.etape.change, this.etapes));
 		return options;
 	}
 	static creerRadio(etiquette, name, value, evt) {
@@ -176,7 +180,7 @@ class Presentation {
 		var resultat, k;
 		resultat = document.createElement('div');
 		for (k in boutons) {
-			resultat.appendChild(this.creerRadio(boutons[k], name, k, evt));
+			resultat.appendChild(this.creerRadio(boutons[k].titre, name, k, evt));
 		}
 		return resultat;
 	}
@@ -186,7 +190,6 @@ class Presentation {
 		styles = document.querySelectorAll(selecteur);
 		for (i = 0, n = styles.length; i < n; i += 1) {
 			styles[i].disabled = true;
-			//TODO UTILISER DISABLED
 		}
 		return this;
 	}
@@ -199,7 +202,6 @@ class Presentation {
 		styles = document.querySelectorAll(selecteur);
 		for (i = 0, n = styles.length; i < n; i += 1) {
 			styles[i].disabled = false;
-			//TODO UTILISER DISABLED
 		}
 		return this;
 	}
@@ -234,6 +236,9 @@ class Presentation {
 	static trouverRegles(element) {
 		var resultat;
 		var regles = this.getRules();
+		if (!element) {
+			return regles;
+		}
 		resultat = regles.filter(r=>element.matches(r.selectorText));
 		return resultat;
 	}
