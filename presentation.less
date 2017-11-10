@@ -7,10 +7,10 @@ html {
 }
 body {
 	margin:0;
+	padding: 0;
 	display:flex;
 	flex-direction: column;
-	min-height:100%;
-	width:100%;
+	height:100%;
 }
 div.milieu {
 	display: flex;
@@ -53,11 +53,15 @@ body {
 		display:flex;
 	}
 	span.radio {
+		flex: 1 1 auto;
 		margin: .25em;
 		line-height: 1;
+		display: flex;
+		flex-direction: column;
+		max-height: 3em;
 		& > label {
 			.bouton;
-			height: 3em;
+			flex: 1 1 0;
 			padding: 0 1em;
 		}
 		& > input {
@@ -202,13 +206,14 @@ div.description {
 	}
 	div.milieu {
 		flex-direction: row;
-		flex: 1 0 auto;
+		flex: 1 1 0;
 		#body {
-			flex: 0 1 40em;
+			flex: 3 1 0;
 			order: 1;
+			overflow: auto;
 		}
 		#pres-options {
-			flex: 0 0 7em;
+			flex: 0 0 8em;
 			order: 0;
 			& > div {
 				flex-direction: column;
@@ -216,7 +221,7 @@ div.description {
 		}
 		#code {
 			order: 2;
-			flex: 1 0 20em;
+			flex: 2 1 0;
 			& > div {
 				flex: 1 0 0;
 			}
